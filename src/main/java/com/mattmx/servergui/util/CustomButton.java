@@ -83,8 +83,7 @@ public class CustomButton {
                         }
                     }
                 } else {
-                    builder.lore(config.getStringList(path + ".lore")
-                                    .stream().map(l -> VelocityChat.color(l, p, server).asComponent()).collect(Collectors.toList()));
+                    builder.lore(config.getStringList(path + ".lore").stream().map(l -> VelocityChat.color(l, p, server).asComponent()).collect(Collectors.toList()));
                 }
                 return builder;
             }

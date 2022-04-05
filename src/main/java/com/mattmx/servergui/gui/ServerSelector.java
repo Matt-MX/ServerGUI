@@ -1,10 +1,7 @@
 package com.mattmx.servergui.gui;
 
 import com.mattmx.servergui.Servergui;
-import com.mattmx.servergui.util.Config;
-import com.mattmx.servergui.util.CustomButton;
-import com.mattmx.servergui.util.InventoryBuilder;
-import com.mattmx.servergui.util.VelocityChat;
+import com.mattmx.servergui.util.*;
 import com.velocitypowered.api.proxy.ConnectionRequestBuilder;
 import com.velocitypowered.api.proxy.Player;
 import dev.simplix.protocolize.api.Protocolize;
@@ -63,15 +60,23 @@ public class ServerSelector extends InventoryBuilder {
             ));
             Servergui.get().getServer().getServer(name).ifPresentOrElse(s -> {
                 Servergui.get().getServer().getScheduler().buildTask(Servergui.get(), () -> {
-                    CompletableFuture<ConnectionRequestBuilder.Result> result = p.createConnectionRequest(s).connect();
                     try {
-                        if (!result.get().isSuccessful()) {
-                            p.sendMessage(VelocityChat.color(Config.MESSAGES.getString("command-feedback.server.failure"), p, s));
-                        } else {
-                            p.sendMessage(VelocityChat.color(Config.MESSAGES.getString("command-feedback.server.connecting"), p, s));
-                            protocolizePlayer.closeInventory();
+                        s.ping().join();
+                        CompletableFuture<ConnectionRequestBuilder.Result> result = p.createConnectionRequest(s).connect();
+                        try {
+                            if (!result.get().isSuccessful()) {
+                                p.sendMessage(VelocityChat.color(Config.MESSAGES.getString("command-feedback.server.failure"), p, s));
+                            } else {
+                                p.sendMessage(VelocityChat.color(Config.MESSAGES.getString("command-feedback.server.connecting"), p, s));
+                                protocolizePlayer.closeInventory();
+                            }
+                        } catch (InterruptedException | ExecutionException e) {
+                            p.sendMessage(VelocityChat.color(
+                                    Config.MESSAGES.getString("command-feedback.server.failure")
+                                            .replace("%server%", name)
+                            ));
                         }
-                    } catch (InterruptedException | ExecutionException e) {
+                    } catch (Exception e) {
                         p.sendMessage(VelocityChat.color(
                                 Config.MESSAGES.getString("command-feedback.server.failure")
                                         .replace("%server%", name)
