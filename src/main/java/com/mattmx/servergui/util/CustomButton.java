@@ -111,6 +111,11 @@ public class CustomButton {
         if (server.getPlayersConnected().contains(p)) {
             return ServerStatus.ALREADY_CONNECTED;
         }
-        return ServerStatus.AVALIABLE;
+        try {
+            server.ping().join();
+            return ServerStatus.AVALIABLE;
+        } catch (Exception e) {
+            return ServerStatus.UNAVALIABLE;
+        }
     }
 }
