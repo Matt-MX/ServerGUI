@@ -28,7 +28,7 @@ public class ServerGuiCommand implements SimpleCommand {
             return;
         }
         Player p = (Player) source;
-        if (p.hasPermission("servergui.command.server")) {
+        if (p.hasPermission("servergui.commands.server")) {
             if (args.length > 0) {
                 switch (args[0]) {
                     case "reload" -> {

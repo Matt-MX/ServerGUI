@@ -1,6 +1,10 @@
 server-selector:
+  # How many rows do we want?
   rows: 3
+  # The GUI Title
   title: "&#2790fdS&#269dfde&#26aafdr&#25b6fdv&#25c3fde&#24d0fdr&#23ddfdG&#23e9fdu&#22f6fdi"
+  # Do we want to change the items if the server they represent is not available, full or the player is already connected?
+  dynamic-items: true
   materials:
     unavailable: STONE
     full: STONE
@@ -18,6 +22,7 @@ server-selector:
       - "&7You are already connected to this server."
       - "&7There are &f%players% &7players in this server."
       - ""
+  # Items we want in the GUI
   items:
     11:
       material: IRON_BLOCK

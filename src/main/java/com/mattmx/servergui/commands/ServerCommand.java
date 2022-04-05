@@ -29,7 +29,7 @@ public class ServerCommand implements SimpleCommand {
             return;
         }
         Player p = (Player) source;
-        if (p.hasPermission("servergui.command.server")) {
+        if (p.hasPermission("servergui.commands.server")) {
             if (args.length > 0) {
                 if (isValidServer(args[0])) {
                     if (p.getCurrentServer().get().getServer() == Servergui.get().getServer().getServer(args[0]).get()) {

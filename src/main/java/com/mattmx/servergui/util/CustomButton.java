@@ -59,28 +59,32 @@ public class CustomButton {
                 if (config.getString(path + ".server") == null) {
                     status = ServerStatus.AVALIABLE;
                 }
-                //todo : gui also doesn't actually try to connect you. Also closes gui always
-                if (status != null) {
-                    switch (status) {
-                        case FULL -> {
-                            builder.lore(config.getStringList("server-selector.lores.full").stream().map(l -> VelocityChat.color(l, p, server).asComponent()).collect(Collectors.toList()));
-                            try { builder.type(ItemType.valueOf(config.getString("server-selector.materials.full")));
-                            } catch (Exception e) {}
+                if (config.getBoolean("server-selector.dynamic-items")) {
+                    if (status != null) {
+                        switch (status) {
+                            case FULL -> {
+                                builder.lore(config.getStringList("server-selector.lores.full").stream().map(l -> VelocityChat.color(l, p, server).asComponent()).collect(Collectors.toList()));
+                                try { builder.type(ItemType.valueOf(config.getString("server-selector.materials.full")));
+                                } catch (Exception e) {}
+                            }
+                            case UNAVALIABLE -> {
+                                builder.lore(config.getStringList("server-selector.lores.unavailable").stream().map(l -> VelocityChat.color(l, p, server).asComponent()).collect(Collectors.toList()));
+                                try { builder.type(ItemType.valueOf(config.getString("server-selector.materials.unavailable")));
+                                } catch (Exception e) {}
+                            }
+                            case ALREADY_CONNECTED -> {
+                                builder.lore(config.getStringList("server-selector.lores.connected").stream().map(l -> VelocityChat.color(l, p, server).asComponent()).collect(Collectors.toList()));
+                                try { builder.type(ItemType.valueOf(config.getString("server-selector.materials.connected")));
+                                } catch (Exception e) {}
+                            }
+                            default -> builder.lore(
+                                    config.getStringList(path + ".lore")
+                                            .stream().map(l -> VelocityChat.color(l, p, server).asComponent()).collect(Collectors.toList()));
                         }
-                        case UNAVALIABLE -> {
-                            builder.lore(config.getStringList("server-selector.lores.unavailable").stream().map(l -> VelocityChat.color(l, p, server).asComponent()).collect(Collectors.toList()));
-                            try { builder.type(ItemType.valueOf(config.getString("server-selector.materials.unavailable")));
-                            } catch (Exception e) {}
-                        }
-                        case ALREADY_CONNECTED -> {
-                            builder.lore(config.getStringList("server-selector.lores.connected").stream().map(l -> VelocityChat.color(l, p, server).asComponent()).collect(Collectors.toList()));
-                            try { builder.type(ItemType.valueOf(config.getString("server-selector.materials.connected")));
-                            } catch (Exception e) {}
-                        }
-                        default -> builder.lore(
-                                config.getStringList(path + ".lore")
-                                .stream().map(l -> VelocityChat.color(l, p, server).asComponent()).collect(Collectors.toList()));
                     }
+                } else {
+                    builder.lore(config.getStringList(path + ".lore")
+                                    .stream().map(l -> VelocityChat.color(l, p, server).asComponent()).collect(Collectors.toList()));
                 }
                 return builder;
             }
