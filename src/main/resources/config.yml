@@ -1,0 +1,65 @@
+server-selector:
+  rows: 3
+  title: "&#06fbd6S&#14fbd9e&#22fadcr&#30fadfv&#3dfae2e&#4bf9e5r &#59f9e8S&#67f9ebe&#75f9eel&#83f8f1e&#90f8f4c&#9ef8f7t&#acf7fao&#baf7fdr"
+  materials:
+    unavailable: STONE
+    full: STONE
+    connected: DIAMOND_BLOCK
+  lores:
+    unavailable:
+      - ""
+      - "&7This server is currently unavailable"
+      - ""
+    full:
+      - ""
+      - "&7This server is full!"
+    connected:
+      - ""
+      - "&7You are already connected to this server."
+      - "&7There are &f%players% &7players in this server."
+      - ""
+  items:
+    11:
+      material: IRON_BLOCK
+      name: "&b&lLobby 1"
+      lore:
+        - ""
+        - "&7There are %players% connected"
+        - ""
+      server: eu1
+    12:
+      material: IRON_BLOCK
+      name: "&b&lLobby 2"
+      lore:
+        - ""
+        - "&7There are %players% connected"
+        - ""
+      server: eu2
+    13:
+      material: IRON_BLOCK
+      name: "&b&lLobby 3"
+      lore:
+        - ""
+        - "&7There are %players% connected"
+        - ""
+      server: eu3
+    14:
+      material: IRON_BLOCK
+      name: "&b&lLobby 4"
+      lore:
+        - ""
+        - "&7There are %players% connected"
+        - ""
+      server: eu4
+    15:
+      material: IRON_BLOCK
+      name: "&b&lLobby 5"
+      lore:
+        - ""
+        - "&7There are %players% connected"
+        - ""
+      server: eu5
+    22:
+      material: COMPASS
+      name: "&#06fbd6C&#0dfbd8l&#14fbd9i&#1cfbdbc&#23fadck &#2afadea &#31fadfs&#38fae1e&#40fae2r&#47fae4v&#4ef9e6e&#55f9e7r &#5cf9e9i&#64f9eac&#6bf9eco&#72f9edn &#79f8eft&#80f8f1o &#88f8f2c&#8ff8f4o&#96f8f5n&#9df8f7n&#a4f7f8e&#acf7fac&#b3f7fbt&#baf7fd!"
+
