@@ -34,7 +34,7 @@ public class ServerGuiCommand implements SimpleCommand {
                     case "reload" -> {
                         if (p.hasPermission("servergui.commands.reload")) {
                             Config.init();
-                            p.sendMessage(VelocityChat.color("&#ef0efbS&#d40ffbe&#b810fcr&#9d11fcv&#8112fce&#6612fcr&#4a13fdG&#2f14fdu&#1315fdi &7» &fConfig Reloaded"));
+                            p.sendMessage(VelocityChat.color("&#2790fdS&#269dfde&#26aafdr&#25b6fdv&#25c3fde&#24d0fdr&#23ddfdG&#23e9fdu&#22f6fdi &7» &fConfig Reloaded"));
                         } else {
                             p.sendMessage(VelocityChat.color(
                                     Config.MESSAGES.getString("command-feedback.no-permissions")
@@ -42,11 +42,11 @@ public class ServerGuiCommand implements SimpleCommand {
                         }
                     }
                     default -> {
-                        p.sendMessage(VelocityChat.color("&#ef0efbS&#d40ffbe&#b810fcr&#9d11fcv&#8112fce&#6612fcr&#4a13fdG&#2f14fdu&#1315fdi &7» &fRunning v1.0.0"));
+                        p.sendMessage(VelocityChat.color("&#2790fdS&#269dfde&#26aafdr&#25b6fdv&#25c3fde&#24d0fdr&#23ddfdG&#23e9fdu&#22f6fdi &7» &fRunning v1.0.0"));
                     }
                 }
             } else {
-                p.sendMessage(VelocityChat.color("&#ef0efbS&#d40ffbe&#b810fcr&#9d11fcv&#8112fce&#6612fcr&#4a13fdG&#2f14fdu&#1315fdi &7» &fRunning v1.0.0"));
+                p.sendMessage(VelocityChat.color("&#2790fdS&#269dfde&#26aafdr&#25b6fdv&#25c3fde&#24d0fdr&#23ddfdG&#23e9fdu&#22f6fdi &7» &fRunning v1.0.0"));
             }
         } else {
             p.sendMessage(VelocityChat.color(
