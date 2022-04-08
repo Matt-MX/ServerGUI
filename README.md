@@ -114,6 +114,7 @@ Project Link: [https://github.com/Matt-MX/ServerGUI](https://github.com/Matt-MX/
 
 * [Protocolize](https://github.com/Exceptionflug/protocolize)
 * [Velocity](https://velocitypowered.com/)
+* [VelocityGUI](https://github.com/james090500/VelocityGUI) for help of processing guis with velocity!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
