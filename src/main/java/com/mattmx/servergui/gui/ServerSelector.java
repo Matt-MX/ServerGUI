@@ -67,7 +67,7 @@ public class ServerSelector extends InventoryBuilder {
                             if (!result.get().isSuccessful()) {
                                 p.sendMessage(VelocityChat.color(Config.MESSAGES.getString("command-feedback.server.failure"), p, s));
                             } else {
-                                p.sendMessage(VelocityChat.color(Config.MESSAGES.getString("command-feedback.server.connecting"), p, s));
+                                p.sendMessage(VelocityChat.color(Config.MESSAGES.getString("command-feedback.server.connected"), p, s));
                                 protocolizePlayer.closeInventory();
                             }
                         } catch (InterruptedException | ExecutionException e) {
