@@ -58,8 +58,8 @@ public class ServerSelector extends InventoryBuilder {
                     Config.MESSAGES.getString("command-feedback.server.connecting")
                             .replace("%server%", name)
             ));
-            Servergui.get().getServer().getServer(name).ifPresentOrElse(s -> {
-                Servergui.get().getServer().getScheduler().buildTask(Servergui.get(), () -> {
+            Servergui.get().getServer().getScheduler().buildTask(Servergui.get(), () -> {
+                Servergui.get().getServer().getServer(name).ifPresentOrElse(s -> {
                     try {
                         s.ping();
                         CompletableFuture<ConnectionRequestBuilder.Result> result = p.createConnectionRequest(s).connect();
@@ -82,13 +82,13 @@ public class ServerSelector extends InventoryBuilder {
                                         .replace("%server%", name)
                         ));
                     }
-                }).schedule();
-            },() -> {
-                p.sendMessage(VelocityChat.color(
-                        Config.MESSAGES.getString("command-feedback.server.invalid-server")
-                                .replace("%server%", name)
-                ));
-            });
+                }, () -> {
+                    p.sendMessage(VelocityChat.color(
+                            Config.MESSAGES.getString("command-feedback.server.invalid-server")
+                                    .replace("%server%", name)
+                    ));
+                });
+            }).schedule();
         }
     }
 }

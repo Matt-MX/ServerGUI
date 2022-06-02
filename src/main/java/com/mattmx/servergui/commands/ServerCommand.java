@@ -43,22 +43,24 @@ public class ServerCommand implements SimpleCommand {
                             Config.MESSAGES.getString("command-feedback.server.connecting")
                                     .replace("%server%", args[0])
                     ));
-                    Servergui.get().getServer().getServer(args[0]).ifPresent(s -> {
-                        CompletableFuture<ConnectionRequestBuilder.Result> result = p.createConnectionRequest(s).connect();
-                        try {
-                            if (!result.get().isSuccessful()) {
+                    Servergui.get().getServer().getScheduler().buildTask(Servergui.get(), () -> {
+                        Servergui.get().getServer().getServer(args[0]).ifPresent(s -> {
+                            CompletableFuture<ConnectionRequestBuilder.Result> result = p.createConnectionRequest(s).connect();
+                            try {
+                                if (!result.get().isSuccessful()) {
+                                    p.sendMessage(VelocityChat.color(
+                                            Config.MESSAGES.getString("command-feedback.server.failure")
+                                                    .replace("%server%", args[0]), p, s
+                                    ));
+                                }
+                            } catch (InterruptedException | ExecutionException e) {
                                 p.sendMessage(VelocityChat.color(
                                         Config.MESSAGES.getString("command-feedback.server.failure")
                                                 .replace("%server%", args[0]), p, s
                                 ));
                             }
-                        } catch (InterruptedException | ExecutionException e) {
-                            p.sendMessage(VelocityChat.color(
-                                    Config.MESSAGES.getString("command-feedback.server.failure")
-                                            .replace("%server%", args[0]), p, s
-                            ));
-                        }
-                    });
+                        });
+                    }).schedule();
                 } else {
                     p.sendMessage(VelocityChat.color(
                             Config.MESSAGES.getString("command-feedback.server.invalid-server")
