@@ -61,7 +61,7 @@ public abstract class InventoryBuilder {
     public void open() {
         // Open the inventory to the player
         Inventory i = build();
-        i.onClick(this::onClick);
+        i.onClick(this::onClickCancel);
         i.onClose(this::onClose);
         ProtocolizePlayer protocolizePlayer = Protocolize.playerProvider().player(player.getUniqueId());
         protocolizePlayer.openInventory(i);
@@ -104,6 +104,11 @@ public abstract class InventoryBuilder {
 
     public void onClick(InventoryClick click) {
 
+    }
+
+    private void onClickCancel(InventoryClick click) {
+        click.cancelled(true);
+        onClick(click);
     }
 
     protected void setEmpty(ItemType itemType) {

@@ -61,7 +61,7 @@ public class ServerSelector extends InventoryBuilder {
             Servergui.get().getServer().getServer(name).ifPresentOrElse(s -> {
                 Servergui.get().getServer().getScheduler().buildTask(Servergui.get(), () -> {
                     try {
-                        s.ping().join();
+                        s.ping();
                         CompletableFuture<ConnectionRequestBuilder.Result> result = p.createConnectionRequest(s).connect();
                         try {
                             if (!result.get().isSuccessful()) {
