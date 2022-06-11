@@ -1,16 +1,9 @@
 # Custom commands to link to certain servers!
 # {command}: {servername}
-# or
-# {command}:
-# - {servername}
-# - {servername}
 # list top priority to least
 commands:
   hub: lobby
   lobby: lobby
-  factions:
-    - factions
-    - lobby
 
 server-selector:
   # How many rows do we want?

@@ -17,6 +17,7 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import org.simpleyaml.configuration.file.FileConfiguration;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,14 +53,18 @@ public class Servergui extends VelocityPlugin {
         getServer().getCommandManager().register("server", new ServerCommand());
         getServer().getCommandManager().register("servergui", new ServerGuiCommand());
         FileConfiguration config = Config.DEFAULT;
+        if (config.getConfigurationSection("commands") == null) return;
         for (String cmd : config.getConfigurationSection("commands").getKeys(false)) {
+            List<String> servers = new ArrayList<>();
             if (config.getString("commands." + cmd) != null) {
-                getServer().getCommandManager().register(cmd, new CustomServerCommand(List.of(config.getString("commands." + cmd))));
+                servers = List.of(config.getString("commands." + cmd));
             } else {
                 if (config.getStringList("commands." + cmd).size() > 0) {
-                    getServer().getCommandManager().register(cmd, new CustomServerCommand(config.getStringList("commands." + cmd)));
+                    servers = config.getStringList("commands." + cmd);
                 }
             }
+            getServer().getCommandManager().register(cmd, new CustomServerCommand(servers));
+            logger().info("Registered command /" + cmd + " with servers " + String.join(", ", servers));
         }
     }
 

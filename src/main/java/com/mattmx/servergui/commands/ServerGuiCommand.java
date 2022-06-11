@@ -42,11 +42,11 @@ public class ServerGuiCommand implements SimpleCommand {
                         }
                     }
                     default -> {
-                        p.sendMessage(VelocityChat.color("&#2790fdS&#269dfde&#26aafdr&#25b6fdv&#25c3fde&#24d0fdr&#23ddfdG&#23e9fdu&#22f6fdi &7» &fRunning v1.0.0"));
+                        p.sendMessage(VelocityChat.color("&#2790fdS&#269dfde&#26aafdr&#25b6fdv&#25c3fde&#24d0fdr&#23ddfdG&#23e9fdu&#22f6fdi &7» &fRunning v" + Servergui.get().getVersion()));
                     }
                 }
             } else {
-                p.sendMessage(VelocityChat.color("&#2790fdS&#269dfde&#26aafdr&#25b6fdv&#25c3fde&#24d0fdr&#23ddfdG&#23e9fdu&#22f6fdi &7» &fRunning v1.0.0"));
+                p.sendMessage(VelocityChat.color("&#2790fdS&#269dfde&#26aafdr&#25b6fdv&#25c3fde&#24d0fdr&#23ddfdG&#23e9fdu&#22f6fdi &7» &fRunning v" + Servergui.get().getVersion()));
             }
         } else {
             p.sendMessage(VelocityChat.color(

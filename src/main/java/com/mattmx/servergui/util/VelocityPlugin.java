@@ -1,5 +1,6 @@
 package com.mattmx.servergui.util;
 
+import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
@@ -126,6 +127,10 @@ public class VelocityPlugin {
                 e.printStackTrace();
             }
         }
+    }
+
+    public String getVersion() {
+        return this.getClass().getAnnotation(Plugin.class).version();
     }
 
     public void setLogger(Logger logger) {
