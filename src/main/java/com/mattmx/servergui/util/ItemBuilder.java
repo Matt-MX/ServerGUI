@@ -1,6 +1,7 @@
 package com.mattmx.servergui.util;
 
 import dev.simplix.protocolize.api.item.ItemStack;
+import dev.simplix.protocolize.api.item.BaseItemStack;
 import dev.simplix.protocolize.data.ItemType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.NBTComponent;
@@ -160,7 +161,7 @@ public class ItemBuilder {
     }
 
     public static ItemBuilder of(ItemBuilder builder) {
-        ItemStack item = builder.item;
+        BaseItemStack item = builder.item;
         return new ItemBuilder(item.itemType())
                 .lore(item.lore().stream().map(e -> (Component) e).collect(Collectors.toList()))
                 .enchantments(builder.enchantments.toArray(new Enchantment[0]))
@@ -168,7 +169,7 @@ public class ItemBuilder {
                 .amount(item.amount());
     }
 
-    public static ItemBuilder from(ItemStack item) {
+    public static ItemBuilder from(BaseItemStack item) {
         ItemBuilder builder = new ItemBuilder(item.itemType());
         builder.name(item.displayName());
         builder.lore(item.lore());
