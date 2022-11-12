@@ -1,7 +1,6 @@
 package com.mattmx.servergui.util.gui;
 
 import com.mattmx.servergui.Servergui;
-import com.mattmx.servergui.util.InventoryBuilder;
 import com.velocitypowered.api.proxy.Player;
 import dev.simplix.protocolize.api.Protocolize;
 import dev.simplix.protocolize.api.inventory.Inventory;
@@ -44,11 +43,11 @@ public class InventoryGui {
     }
 
     public void onClose(InventoryClose close) {
-        closeEvent.accept(this, close);
+        if (closeEvent != null) closeEvent.accept(this, close);
     }
 
     public void onClick(InventoryClick click) {
-        clickEvent.accept(this, click);
+        if (clickEvent != null) clickEvent.accept(this, click);
         ItemButton button = slot(click.slot());
         if (button != null) button.click(click);
     }
@@ -90,6 +89,17 @@ public class InventoryGui {
         InventoryGui g = new InventoryGui(title, type);
         gui.accept(g);
         return g;
+    }
+
+    public static InventoryType rowsOf(int rows) {
+        return switch (rows) {
+            case 1 -> InventoryType.GENERIC_9X1;
+            case 2 -> InventoryType.GENERIC_9X2;
+            case 3 -> InventoryType.GENERIC_9X3;
+            case 4 -> InventoryType.GENERIC_9X4;
+            case 5 -> InventoryType.GENERIC_9X5;
+            default -> InventoryType.GENERIC_9X6;
+        };
     }
 
 }

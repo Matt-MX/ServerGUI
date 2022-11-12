@@ -1,5 +1,6 @@
 package com.mattmx.servergui.util.gui;
 
+import com.mattmx.servergui.Servergui;
 import com.mattmx.servergui.util.ItemBuilder;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
@@ -16,6 +17,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static co.pvphub.velocity.util.FormattingKt.color;
+import static com.mattmx.servergui.util.ServerConnection.connectPlayer;
 
 public class ItemButton {
     private BiConsumer<InventoryClick, ItemButton> clickEvent;
@@ -84,7 +86,13 @@ public class ItemButton {
             // todo enchantment parsing
         });
         button.onClick((click, b) -> {
-            // todo if server is set then try and send to server
+            Player player = Servergui.get()
+                    .getServer()
+                    .getPlayer(click.player().uniqueId())
+                    .orElse(null);
+            if (server != null && player != null) {
+                connectPlayer(player, server);
+            }
         });
         return button;
     }

@@ -5,73 +5,69 @@ commands:
   hub: lobby
   lobby: lobby
 
+# Messages
+command-feedback:
+  no-permissions: "&cYou don't have permissions to execute this command"
+  incorrect-usage: "&cIncorrect usage: %usage%"
+  server:
+    connecting: "&7Attempting to connect you to &f%server%"
+    connected: "&7Connected you to &f%server%"
+    invalid-server: "&7A server by that name could not be found"
+    failure: "&7Unable to connect you to %server%"
+    already-connected: "&7You are already connected to that server"
+
+# The primary server selector gui
 server-selector:
   # How many rows do we want?
   rows: 3
   # The GUI Title
-  title: "&#2790fdS&#269dfde&#26aafdr&#25b6fdv&#25c3fde&#24d0fdr&#23ddfdG&#23e9fdu&#22f6fdi"
+  title: "Server Selector"
+  # How often should we refresh the GUI (in millis)
+  refresh: 30000
   # Do we want to change the items if the server they represent is not available, full or the player is already connected?
+  # todo re-impl this
   dynamic-items: true
   materials:
     unavailable: STONE
-    full: STONE
     connected: DIAMOND_BLOCK
-  lores:
-    unavailable:
-      - ""
-      - "&7This server is currently unavailable"
-      - ""
-    full:
-      - ""
-      - "&7This server is full!"
-    connected:
-      - ""
-      - "&7You are already connected to this server."
-      - "&7There are &f%players% &7players in this server."
-      - ""
   # Items we want in the GUI
   items:
     11:
-      material: IRON_BLOCK
-      name: "&b&lLobby 1"
+      material: RED_BED
+      name: "&c&l[NEW] Bed Wars"
       lore:
         - ""
-        - "&7There are %players% connected"
+        - "&8Fight other players and"
+        - "&8defend your bed, purchase"
+        - "&8upgrades and be the last"
+        - "&8ones standing!"
         - ""
-      server: eu1
-    12:
-      material: IRON_BLOCK
-      name: "&b&lLobby 2"
-      lore:
+        - "&7Click to join %server-online% other players."
         - ""
-        - "&7There are %players% connected"
-        - ""
-      server: eu2
+      server: bedwars
     13:
-      material: IRON_BLOCK
-      name: "&b&lLobby 3"
+      material: PAINTING
+      name: "&b&lPixel Painters"
       lore:
         - ""
-        - "&7There are %players% connected"
+        - "&8Compete in a pictionary"
+        - "&8styled game, taking"
+        - "&8turns to draw something"
+        - "&8and guessing!"
+        - ""
+        - "&7Click to join %server-online% other players."
+        - ""
+      server: pixelpainters
+    15:
+      material: BOW
+      name: "&a&lSkywars"
+      lore:
+        - ""
+        - "&8Each with your own island"
+        - "&8and random loot"
+        - "&8get to the centre and eliminate"
+        - "&8your opponents!"
+        - ""
+        - "&7Click to join %server-online% other players."
         - ""
       server: eu3
-    14:
-      material: IRON_BLOCK
-      name: "&b&lLobby 4"
-      lore:
-        - ""
-        - "&7There are %players% connected"
-        - ""
-      server: eu4
-    15:
-      material: IRON_BLOCK
-      name: "&b&lLobby 5"
-      lore:
-        - ""
-        - "&7There are %players% connected"
-        - ""
-      server: eu5
-    22:
-      material: COMPASS
-      name: "&#06fbd6C&#0dfbd8l&#14fbd9i&#1cfbdbc&#23fadck &#2afadea &#31fadfs&#38fae1e&#40fae2r&#47fae4v&#4ef9e6e&#55f9e7r &#5cf9e9i&#64f9eac&#6bf9eco&#72f9edn &#79f8eft&#80f8f1o &#88f8f2c&#8ff8f4o&#96f8f5n&#9df8f7n&#a4f7f8e&#acf7fac&#b3f7fbt&#baf7fd!"
-
