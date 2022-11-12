@@ -37,6 +37,7 @@ public class ServerSelector extends InventoryBuilder {
 
     @Override
     public void onClick(InventoryClick click) {
+        click.cancelled(true);
         if (click.clickedItem() != null) {
             ProtocolizePlayer protocolizePlayer = Protocolize.playerProvider().player(getPlayer().getUniqueId());
             Player p = getPlayer();

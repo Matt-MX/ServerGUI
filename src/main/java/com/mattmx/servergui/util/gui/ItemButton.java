@@ -2,15 +2,20 @@ package com.mattmx.servergui.util.gui;
 
 import com.mattmx.servergui.util.ItemBuilder;
 import com.velocitypowered.api.proxy.Player;
+import com.velocitypowered.api.proxy.server.RegisteredServer;
 import dev.simplix.protocolize.api.inventory.InventoryClick;
 import dev.simplix.protocolize.api.item.BaseItemStack;
 import dev.simplix.protocolize.api.item.ItemStack;
 import dev.simplix.protocolize.api.player.ProtocolizePlayer;
 import dev.simplix.protocolize.data.ItemType;
+import org.simpleyaml.configuration.file.YamlConfiguration;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
+
+import static co.pvphub.velocity.util.FormattingKt.color;
 
 public class ItemButton {
     private BiConsumer<InventoryClick, ItemButton> clickEvent;
@@ -65,5 +70,22 @@ public class ItemButton {
         ItemButton b = new ItemButton();
         button.accept(b);
         return b;
+    }
+
+    public static ItemButton buttonFromConfig(YamlConfiguration config, String key, RegisteredServer server) {
+        ItemButton button = new ItemButton();
+        button.item(ib -> {
+            ib.type(ItemType.valueOf(config.getString(key + ".material").toUpperCase().replace(" ", "_")));
+            ib.name(color(config.getString(key + ".name"), null, server));
+            ib.lore(config.getStringList(key + ".lore")
+                    .stream()
+                    .map(s -> color(s, null, server))
+                    .collect(Collectors.toList()));
+            // todo enchantment parsing
+        });
+        button.onClick((click, b) -> {
+            // todo if server is set then try and send to server
+        });
+        return button;
     }
 }

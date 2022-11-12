@@ -42,6 +42,10 @@ public class ItemBuilder {
         return this;
     }
 
+    public Component name() {
+        return item.displayName();
+    }
+
     public ItemBuilder lore(Component lore) {
         item.addToLore(lore.style(lore.style().decoration(TextDecoration.ITALIC, false)));
         return this;

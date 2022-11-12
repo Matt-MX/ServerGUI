@@ -16,6 +16,9 @@ public class ServerSelectorGui {
                 ib.type(ItemType.NETHER_STAR)
                         .name(color("&dVelocity GUI", null, null));
             });
+            button.onClick((click, b) -> {
+
+            });
         }).childOf(gui).slot(10);
     });
 
