@@ -1,8 +1,7 @@
 package com.mattmx.servergui.commands;
 
+import co.pvphub.velocity.scheduling.AsyncTask;
 import com.mattmx.servergui.Servergui;
-import com.mattmx.servergui.util.Config;
-import com.mattmx.servergui.util.VelocityChat;
 import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.ConnectionRequestBuilder;
 import com.velocitypowered.api.proxy.Player;
@@ -13,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 
 public class CustomServerCommand implements SimpleCommand {
     private List<String> servers;
+
     public CustomServerCommand(List<String> servers) {
         this.servers = servers;
     }
@@ -23,18 +23,18 @@ public class CustomServerCommand implements SimpleCommand {
             return;
         }
         Player p = (Player) invocation.source();
-        for (String server : servers) {
-            Servergui.get().getServer().getScheduler().buildTask(Servergui.get(), () -> {
+        new AsyncTask(Servergui.get(), (task -> {
+            for (String server : servers) {
                 Servergui.get().getServer().getServer(server).ifPresent(s -> {
                     CompletableFuture<ConnectionRequestBuilder.Result> result = p.createConnectionRequest(s).connect();
                     try {
                         if (result.get().isSuccessful()) {
-                            return;
                         }
                     } catch (InterruptedException | ExecutionException e) {
                     }
                 });
-            }).schedule();
-        }
+            }
+            return null;
+        })).schedule();
     }
 }
