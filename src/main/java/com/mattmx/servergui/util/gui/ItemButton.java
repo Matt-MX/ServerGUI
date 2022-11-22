@@ -4,6 +4,7 @@ import com.mattmx.servergui.Servergui;
 import com.mattmx.servergui.util.ItemBuilder;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
+import com.velocitypowered.api.proxy.server.ServerPing;
 import dev.simplix.protocolize.api.inventory.InventoryClick;
 import dev.simplix.protocolize.api.item.BaseItemStack;
 import dev.simplix.protocolize.api.item.ItemStack;
@@ -11,7 +12,9 @@ import dev.simplix.protocolize.api.player.ProtocolizePlayer;
 import dev.simplix.protocolize.data.ItemType;
 import org.simpleyaml.configuration.file.YamlConfiguration;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -76,12 +79,20 @@ public class ItemButton {
 
     public static ItemButton buttonFromConfig(YamlConfiguration config, String key, RegisteredServer server) {
         ItemButton button = new ItemButton();
+        int playersMax = -1;
+        try {
+            ServerPing ping = server.ping().get(5000, TimeUnit.MILLISECONDS);
+            playersMax = ping.getPlayers().orElse(new ServerPing.Players(server.getPlayersConnected().size(), -1, new ArrayList<>())).getMax();
+        } catch (Exception ignored) {
+        }
+        int finalPlayersMax = playersMax;
         button.item(ib -> {
             ib.type(ItemType.valueOf(config.getString(key + ".material").toUpperCase().replace(" ", "_")));
-            ib.name(color(config.getString(key + ".name"), null, server));
+            ib.name(color(config.getString(key + ".name")
+                            .replace("%server-players-max%", "" + finalPlayersMax), null, server));
             ib.lore(config.getStringList(key + ".lore")
                     .stream()
-                    .map(s -> color(s, null, server))
+                    .map(s -> color(s.replace("%server-players-max%", "" + finalPlayersMax), null, server))
                     .collect(Collectors.toList()));
             // todo enchantment parsing
         });
