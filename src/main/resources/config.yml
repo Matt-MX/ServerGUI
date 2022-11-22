@@ -7,11 +7,8 @@ commands:
 
 # Messages
 command-feedback:
-  no-permissions: "&cYou don't have permissions to execute this command"
-  incorrect-usage: "&cIncorrect usage: %usage%"
   server:
     connecting: "&7Attempting to connect you to &f%server%"
-    connected: "&7Connected you to &f%server%"
     invalid-server: "&7A server by that name could not be found"
     failure: "&7Unable to connect you to %server%"
     already-connected: "&7You are already connected to that server"

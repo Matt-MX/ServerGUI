@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 
 import static co.pvphub.velocity.scheduling.SchedulingKt.async;
 import static co.pvphub.velocity.util.FormattingKt.color;
-import static co.pvphub.velocity.util.FormattingKt.getSerializer;
 import static com.mattmx.servergui.util.ServerConnection.connectPlayer;
 
 @Plugin(
@@ -50,8 +49,9 @@ public class Servergui extends VelocityPlugin {
     }
 
     @Subscribe
-    public void onProxyInitialization(ProxyInitializeEvent event) {
+    public void onProxyInitialization(ProxyInitializeEvent e) {
         saveDefaultConfig();
+
         async(this, (task) -> {
             checker = new UpdateChecker().get("https://api.github.com/repos/Matt-MX/ServerGUI/releases/latest");
             if (checker.isLatest(this.getClass().getAnnotation(Plugin.class).version())) {
@@ -82,7 +82,7 @@ public class Servergui extends VelocityPlugin {
                                     .findFirst()
                                     .orElse(null);
                             if (server == null) {
-                                executor.sendMessage(color("&cInvalid server name!", null, null));
+                                executor.sendMessage(color(Servergui.get().getConfig().getString("command-feedback.server.invalid-server", "&cInvalid server"), null, null));
                                 return null;
                             }
                             connectPlayer((Player) executor, server);

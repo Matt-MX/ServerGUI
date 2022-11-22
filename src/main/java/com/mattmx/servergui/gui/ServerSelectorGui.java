@@ -17,11 +17,11 @@ public class ServerSelectorGui {
     private static InventoryGui ssgui = build();
 
     public static InventoryGui build() {
+        YamlConfiguration config = Servergui.get().getConfig();
         return gui(
-                Component.text("Server Selector"),
+                color(config.getString("server-selector.title", "Server Selector"), null, null),
                 InventoryGui.rowsOf(Servergui.get().getConfig().getInt("server-selector.rows")),
                 (gui) -> {
-                    YamlConfiguration config = Servergui.get().getConfig();
                     for (String key : config.getConfigurationSection("server-selector.items").getKeys(false)) {
                         String serverName = config.getString("server-selector.items." + key + ".server");
                         RegisteredServer server = serverName == null ? null : Servergui.get()
