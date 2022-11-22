@@ -95,11 +95,11 @@ For your config buttons we have some placeholder values available.
 
 `%server-name%` - Server name as seen in `velocity.toml`
 
-`%server-connected%` ]
+Players connected to that backend server
 
-`%server-online%`    ] Players connected to that backend server
-
-`%server-players%`   ]
+`%server-connected%`
+`%server-online%`
+`%server-players%`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
