@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 import static co.pvphub.velocity.util.FormattingKt.color;
 import static com.mattmx.servergui.util.ServerConnection.connectPlayer;
+import static com.mattmx.servergui.util.ServerConnection.connectPlayerAsync;
 
 public class ItemButton {
     private BiConsumer<InventoryClick, ItemButton> clickEvent;
@@ -102,7 +103,7 @@ public class ItemButton {
                     .getPlayer(click.player().uniqueId())
                     .orElse(null);
             if (server != null && player != null) {
-                connectPlayer(player, server);
+                connectPlayerAsync(player, server, (a) -> {});
             }
         });
         return button;
